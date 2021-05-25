@@ -1,0 +1,68 @@
+//To find out the Simple Prime Factorization
+
+#include<bits/stdc++.h>
+using namespace std;
+long long int N=1000001;
+long long int seive[1000001];
+
+void get_seive()
+{
+	
+	seive[0]=1;
+	seive[1]=1;
+
+	for(int i=2;i<=N;i++)
+		seive[i]=i;
+
+	for(int i=2;i*i<=N;i++)
+	{
+		if(seive[i]==i)
+		{
+			for(int j=i*i;j<=N;j+=i)    
+			{
+				if(seive[j]==j)
+				{
+					seive[j]=i;
+				}
+			}
+		}
+	}
+}
+
+
+int main()
+{
+   	get_seive();
+   	
+   	int q;
+   	cin>>q;// no. of queries
+   	while(q--)
+   	{
+   	int n;// input value
+	cin>>n;
+	
+    int count=0;
+	while(n!=1)
+	{
+	
+		int f=n;    
+		int t=seive[n];
+		if(seive[n]==t)
+		    count++;
+		n=n/seive[n];
+		
+		if(n%2==1)
+		{
+		    cout<<t<<"^"<<count;
+		    count=0;
+		}
+		
+		if(count==0&&n!=1)
+		    cout<<"*";
+	}
+	cout<<"\n";
+   	}
+	
+
+return 0;
+}

@@ -1,0 +1,55 @@
+// To calculate the prime factors
+
+#include<bits/stdc++.h>
+using namespace std;
+long long int N=100;
+long long int seive[100];
+
+void get_seive()
+{
+	
+	seive[0]=1;
+	seive[1]=1;
+
+	for(int i=2;i<=N;i++)
+		seive[i]=i;
+
+	for(int i=2;i*i<=N;i++)
+	{
+		if(seive[i]==i)
+		{
+			for(int j=i*i;j<=N;j+=i)    
+			{
+				if(seive[j]==j)
+				{
+					seive[j]=i;
+				}
+			}
+		}
+	}
+}
+
+int main()
+{
+   	get_seive();
+	
+	int q;// no. of queries
+	cin>>q;
+
+	while(q--)
+	{
+    	int n;
+	cin>>n;
+    	int count=0;
+	for(int i=n;i<=N;i++)
+	{
+	  	if(seive[i]==n)
+	  	    {
+	  	    //cout<<i<<" ";
+	  	    count++;
+	  	    }
+	}
+	cout<<count<<"\n";
+	}
+return 0;
+}
